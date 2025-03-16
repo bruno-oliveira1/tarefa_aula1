@@ -34,12 +34,22 @@ public class GreetingControllerTests {
 	@Autowired
 	private MockMvc mockMvc;
 
+	/**
+	 * Testa se a requisição para "/greeting" sem parâmetros retorna a mensagem padrão "Hello, World!".
+	 */
 	@Test
 	public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
 
 		this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
 				.andExpect(jsonPath("$.content").value("Hello, World!"));
 	}
+
+	/**
+	 * Testa se a requisição para "/greeting" com o parâmetro "name" retorna uma mensagem com Hello, name!.
+	 * Ex: {
+			  "content": "Hello, Bruno!"
+		}
+	 */
 
 	@Test
 	public void paramGreetingShouldReturnTailoredMessage() throws Exception {
